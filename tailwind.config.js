@@ -1,9 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["public/index.php"],
+  corePlugins: {
+    preflight: true,
+  },
+  content: [
+    "./public/**/*.php",
+    "./formulaires/**/*.php",
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
-
+};

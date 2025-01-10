@@ -38,6 +38,11 @@ class GestionNote {
         return $getFonction->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getNote() {
+        $getFonction = $this->pdo->query("SELECT prenom, nom, nomMatiere, valeurNote, bareme FROM notes INNER JOIN etudiants ON notes.idEtudiant = etudiants.id INNER JOIN matieres ON notes.idMatiere = matieres.id");
+        return $getFonction->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function ajouterNote($idEtudiant, $idMatiere, $valeur, $bareme){
         $pushFonction = $this->pdo->prepare("INSERT INTO notes (idEtudiant, idMatiere, valeurNote, bareme) VALUES (:idEtudiant, :idMatiere, :valeurNote, :bareme)");
         $pushFonction->execute([
@@ -55,3 +60,4 @@ class GestionNote {
 $gestionNote = new GestionNote();
 $etudiantList = $gestionNote->getEtudiant();
 $matiereList = $gestionNote->getMatiere();
+$noteList = $gestionNote->getNote();
